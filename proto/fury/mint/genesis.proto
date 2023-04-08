@@ -2,8 +2,8 @@ syntax = "proto3";
 package furynet.furynetwork.mint;
 
 import "gogoproto/gogo.proto";
-import "furynetwork/mint/params.proto";
-import "furynetwork/mint/minter.proto";
+import "fury/mint/params.proto";
+import "fury/mint/minter.proto";
 
 option go_package = "github.com/furynet/furynetwork/x/mint/types";
 

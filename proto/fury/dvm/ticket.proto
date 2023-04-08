@@ -1,7 +1,7 @@
 syntax = "proto3";
 package furynet.furynetwork.dvm;
 
-import "furynetwork/dvm/vote.proto";
+import "fury/dvm/vote.proto";
 
 option go_package = "github.com/furynet/furynetwork/x/dvm/types";
 

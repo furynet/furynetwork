@@ -2,9 +2,9 @@ syntax = "proto3";
 package furynet.furynetwork.bet;
 
 import "gogoproto/gogo.proto";
-import "furynetwork/bet/params.proto";
-import "furynetwork/bet/bet.proto";
-import "furynetwork/bet/stats.proto";
+import "fury/bet/params.proto";
+import "fury/bet/bet.proto";
+import "fury/bet/stats.proto";
 
 option go_package = "github.com/furynet/furynetwork/x/bet/types";
 

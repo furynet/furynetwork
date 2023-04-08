@@ -16,7 +16,7 @@ PACKAGES_SIMTEST=$(shell go list ./... | grep '/simulation')
 LEDGER_ENABLED ?= true
 SDK_PACK := $(shell go list -m github.com/cosmos/cosmos-sdk | sed  's/ /\@/g')
 TM_VERSION := $(shell go list -m github.com/tendermint/tendermint | sed 's:.* ::') # grab everything after the space in "github.com/tendermint/tendermint v0.34.7"
-HTTPS_GIT := https://github.com/furynet/furynetwork.git
+HTTPS_GIT := https://github.com/furynet/furynetworknetwork.git
 DOCKER := $(shell which docker)
 DOCKER_BUF := $(DOCKER) run --rm -v $(CURDIR)/proto:/workspace --workdir /workspace bufbuild/buf
 BUILDDIR ?= $(CURDIR)/build
@@ -187,7 +187,7 @@ docs:
 .PHONY: docs
 
 protoVer=v0.8
-protoImageName=furynetwork/fury-proto-gen:$(protoVer)
+protoImageName=fury/fury-proto-gen:$(protoVer)
 containerProtoGen=cosmos-sdk-proto-gen-$(protoVer)
 containerProtoFmt=cosmos-sdk-proto-fmt-$(protoVer)
 

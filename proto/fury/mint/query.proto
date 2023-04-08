@@ -3,7 +3,7 @@ package furynet.furynetwork.mint;
 
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
-import "furynetwork/mint/params.proto";
+import "fury/mint/params.proto";
 
 option go_package = "github.com/furynet/furynetwork/x/mint/types";
 
@@ -11,7 +11,7 @@ option go_package = "github.com/furynet/furynetwork/x/mint/types";
 service Query {
   // Params queries the parameters of the module.
   rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
-    option (google.api.http).get = "/furynetwork/mint/params";
+    option (google.api.http).get = "/fury/mint/params";
   }
 
   // Inflation returns the current minting inflation value.

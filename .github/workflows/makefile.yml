@@ -19,7 +19,7 @@ jobs:
       uses: actions/checkout@v3.0.0
       with:
         ref: master
-        repository: furynet/furynetwork
+        repository: furynet/furynetworknetwork
         path: fury
 
     - name: Checkout destination repository
@@ -32,7 +32,7 @@ jobs:
 
     - name: Copy Proto Files
       run: |
-        cp -r furynetwork/proto/fury furyjs/proto
+        cp -r fury/proto/fury furyjs/proto
         git -C furyjs add .
         git -C furyjs status
         git -C furyjs config user.email "action@github.com"

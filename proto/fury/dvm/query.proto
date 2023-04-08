@@ -4,8 +4,8 @@ package furynet.furynetwork.dvm;
 import "gogoproto/gogo.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "google/api/annotations.proto";
-import "furynetwork/dvm/params.proto";
-import "furynetwork/dvm/proposal.proto";
+import "fury/dvm/params.proto";
+import "fury/dvm/proposal.proto";
 
 option go_package = "github.com/furynet/furynetwork/x/dvm/types";
 
@@ -13,21 +13,23 @@ option go_package = "github.com/furynet/furynetwork/x/dvm/types";
 service Query {
   // Params queries the parameters of the module.
   rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
-    option (google.api.http).get = "/furynetwork/dvm/params";
+    option (google.api.http).get = "/fury/dvm/params";
   }
   // Queries a list of PubKeys items.
   rpc PubKeys(QueryPubKeysRequest) returns (QueryPubKeysResponse) {
-    option (google.api.http).get = "/furynetwork/dvm/pub_keys";
+    option (google.api.http).get = "/fury/dvm/pub_keys";
   }
   // Queries an proposal by id and status.
   rpc PublicKeysChangeProposal(QueryPublicKeysChangeProposalRequest)
       returns (QueryPublicKeysChangeProposalResponse) {
-    option (google.api.http).get = "/furynetwork/dvm/pubkeys_proposal/{status}/{id}";
+    option (google.api.http).get =
+        "/fury/dvm/pubkeys_proposal/{status}/{id}";
   }
   // Queries a list of proposal items by status.
   rpc PublicKeysChangeProposals(QueryPublicKeysChangeProposalsRequest)
       returns (QueryPublicKeysChangeProposalsResponse) {
-    option (google.api.http).get = "/furynetwork/dvm/pubkeys_proposals/{status}";
+    option (google.api.http).get =
+        "/fury/dvm/pubkeys_proposals/{status}";
   }
 }
 

@@ -4,8 +4,8 @@ package furynet.furynetwork.market;
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
-import "furynetwork/market/params.proto";
-import "furynetwork/market/market.proto";
+import "fury/market/params.proto";
+import "fury/market/market.proto";
 
 option go_package = "github.com/furynet/furynetwork/x/market/types";
 
@@ -13,23 +13,23 @@ option go_package = "github.com/furynet/furynetwork/x/market/types";
 service Query {
   // Params queries the parameters of the module.
   rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
-    option (google.api.http).get = "/furynetwork/market/params";
+    option (google.api.http).get = "/fury/market/params";
   }
 
   // Queries a market by uid.
   rpc Market(QueryMarketRequest) returns (QueryMarketResponse) {
-    option (google.api.http).get = "/furynetwork/market/{uid}";
+    option (google.api.http).get = "/fury/market/{uid}";
   }
 
   // Queries a list of all the markets
   rpc Markets(QueryMarketsRequest) returns (QueryMarketsResponse) {
-    option (google.api.http).get = "/furynetwork/market/markets";
+    option (google.api.http).get = "/fury/market/markets";
   }
 
   // Queries a list of markets by UIDs.
   rpc MarketsByUIDs(QueryMarketsByUIDsRequest)
       returns (QueryMarketsByUIDsResponse) {
-    option (google.api.http).get = "/furynetwork/market/markets_by_uids/{uids}";
+    option (google.api.http).get = "/fury/market/markets_by_uids/{uids}";
   }
 }
 

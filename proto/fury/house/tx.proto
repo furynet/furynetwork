@@ -2,7 +2,7 @@ syntax = "proto3";
 package furynet.furynetwork.house;
 
 import "gogoproto/gogo.proto";
-import "furynetwork/house/withdraw.proto";
+import "fury/house/withdraw.proto";
 
 option go_package = "github.com/furynet/furynetwork/x/house/types";
 

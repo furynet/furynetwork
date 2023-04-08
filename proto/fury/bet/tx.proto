@@ -1,7 +1,7 @@
 syntax = "proto3";
 package furynet.furynetwork.bet;
 
-import "furynetwork/bet/place_bet_fields.proto";
+import "fury/bet/place_bet_fields.proto";
 
 option go_package = "github.com/furynet/furynetwork/x/bet/types";
 

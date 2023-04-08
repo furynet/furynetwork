@@ -2,9 +2,9 @@ syntax = "proto3";
 package furynet.furynetwork.market;
 
 import "gogoproto/gogo.proto";
-import "furynetwork/market/params.proto";
-import "furynetwork/market/market.proto";
-import "furynetwork/market/stats.proto";
+import "fury/market/params.proto";
+import "fury/market/market.proto";
+import "fury/market/stats.proto";
 
 option go_package = "github.com/furynet/furynetwork/x/market/types";
 

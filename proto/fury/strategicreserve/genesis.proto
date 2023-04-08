@@ -2,11 +2,11 @@ syntax = "proto3";
 package furynet.furynetwork.strategicreserve;
 
 import "gogoproto/gogo.proto";
-import "furynetwork/strategicreserve/params.proto";
-import "furynetwork/strategicreserve/orderbook.proto";
-import "furynetwork/strategicreserve/participation.proto";
-import "furynetwork/strategicreserve/stats.proto";
-import "furynetwork/strategicreserve/exposure.proto";
+import "fury/strategicreserve/params.proto";
+import "fury/strategicreserve/orderbook.proto";
+import "fury/strategicreserve/participation.proto";
+import "fury/strategicreserve/stats.proto";
+import "fury/strategicreserve/exposure.proto";
 
 option go_package = "github.com/furynet/furynetwork/x/strategicreserve/types";
 

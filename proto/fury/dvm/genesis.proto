@@ -2,10 +2,10 @@ syntax = "proto3";
 package furynet.furynetwork.dvm;
 
 import "gogoproto/gogo.proto";
-import "furynetwork/dvm/params.proto";
-import "furynetwork/dvm/key_vault.proto";
-import "furynetwork/dvm/proposal.proto";
-import "furynetwork/dvm/stats.proto";
+import "fury/dvm/params.proto";
+import "fury/dvm/key_vault.proto";
+import "fury/dvm/proposal.proto";
+import "fury/dvm/stats.proto";
 
 option go_package = "github.com/furynet/furynetwork/x/dvm/types";
 

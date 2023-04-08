@@ -2,7 +2,7 @@ syntax = "proto3";
 package furynet.furynetwork.mint;
 
 import "gogoproto/gogo.proto";
-import "furynetwork/mint/phase.proto";
+import "fury/mint/phase.proto";
 
 option go_package = "github.com/furynet/furynetwork/x/mint/types";
 

@@ -2,8 +2,8 @@ syntax = "proto3";
 package furynet.furynetwork.dvm;
 
 import "gogoproto/gogo.proto";
-import "furynetwork/dvm/ticket.proto";
-import "furynetwork/dvm/vote.proto";
+import "fury/dvm/ticket.proto";
+import "fury/dvm/vote.proto";
 
 option go_package = "github.com/furynet/furynetwork/x/dvm/types";
 
