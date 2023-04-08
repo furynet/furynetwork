@@ -5,9 +5,9 @@ import (
 	"testing"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/sge-network/sge/consts"
-	"github.com/sge-network/sge/testutil/nullify"
-	"github.com/sge-network/sge/x/dvm/types"
+	"github.com/furynet/furynetwork/consts"
+	"github.com/furynet/furynetwork/testutil/nullify"
+	"github.com/furynet/furynetwork/x/dvm/types"
 	"github.com/stretchr/testify/require"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"

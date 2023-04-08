@@ -1,7 +1,7 @@
 package keeper
 
 import (
-	"github.com/sge-network/sge/x/dvm/types"
+	"github.com/furynet/furynetwork/x/dvm/types"
 )
 
 type msgServer struct {

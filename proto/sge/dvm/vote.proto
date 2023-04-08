@@ -1,7 +1,7 @@
 syntax = "proto3";
-package sgenetwork.sge.dvm;
+package furynet.furynetwork.dvm;
 
-option go_package = "github.com/sge-network/sge/x/dvm/types";
+option go_package = "github.com/furynet/furynetwork/x/dvm/types";
 
 // Vote is the type for the proposal vote.
 message Vote {

@@ -2,7 +2,7 @@ package keeper
 
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/sge-network/sge/x/dvm/types"
+	"github.com/furynet/furynetwork/x/dvm/types"
 )
 
 // SetKeyVault sets the key vault and overwrite the old values.

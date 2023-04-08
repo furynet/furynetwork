@@ -3,7 +3,7 @@ package keeper
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/sge-network/sge/x/strategicreserve/types"
+	"github.com/furynet/furynetwork/x/strategicreserve/types"
 )
 
 // SetParticipationExposure sets a participation exposure.

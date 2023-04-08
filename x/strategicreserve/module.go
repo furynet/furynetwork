@@ -15,9 +15,9 @@ import (
 	"github.com/spf13/cobra"
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"github.com/sge-network/sge/x/strategicreserve/client/cli"
-	"github.com/sge-network/sge/x/strategicreserve/keeper"
-	"github.com/sge-network/sge/x/strategicreserve/types"
+	"github.com/furynet/furynetwork/x/strategicreserve/client/cli"
+	"github.com/furynet/furynetwork/x/strategicreserve/keeper"
+	"github.com/furynet/furynetwork/x/strategicreserve/types"
 )
 
 // AppModuleBasic defines the basic application module used by the strategicreserve module.

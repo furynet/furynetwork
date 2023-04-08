@@ -5,8 +5,8 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
-	"github.com/sge-network/sge/x/market/keeper"
-	"github.com/sge-network/sge/x/market/types"
+	"github.com/furynet/furynetwork/x/market/keeper"
+	"github.com/furynet/furynetwork/x/market/types"
 )
 
 // NewHandler ...

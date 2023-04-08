@@ -5,8 +5,8 @@ import (
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	"github.com/spf13/cast"
 
-	bettypes "github.com/sge-network/sge/x/bet/types"
-	"github.com/sge-network/sge/x/strategicreserve/types"
+	bettypes "github.com/furynet/furynetwork/x/bet/types"
+	"github.com/furynet/furynetwork/x/strategicreserve/types"
 )
 
 // ProcessBetPlacement processes bet placement

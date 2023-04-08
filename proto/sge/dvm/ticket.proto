@@ -1,9 +1,9 @@
 syntax = "proto3";
-package sgenetwork.sge.dvm;
+package furynet.furynetwork.dvm;
 
-import "sge/dvm/vote.proto";
+import "furynetwork/dvm/vote.proto";
 
-option go_package = "github.com/sge-network/sge/x/dvm/types";
+option go_package = "github.com/furynet/furynetwork/x/dvm/types";
 
 // PubkeysChangeProposalPayload indicates data of public keys changes proposal
 // ticket.

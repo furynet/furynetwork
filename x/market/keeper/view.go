@@ -3,7 +3,7 @@ package keeper
 import (
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/sge-network/sge/x/market/types"
+	"github.com/furynet/furynetwork/x/market/types"
 )
 
 // getMarketsStore gets the store containing all markets.

@@ -1,4 +1,4 @@
-module github.com/sge-network/sge
+module github.com/furynet/furynetwork
 
 go 1.18
 

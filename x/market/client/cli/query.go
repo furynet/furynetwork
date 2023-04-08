@@ -6,7 +6,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/spf13/cobra"
 
-	"github.com/sge-network/sge/x/market/types"
+	"github.com/furynet/furynetwork/x/market/types"
 )
 
 // GetQueryCmd returns the cli query commands for this module

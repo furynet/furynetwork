@@ -9,8 +9,8 @@ import (
 
 	"github.com/golang-jwt/jwt"
 	"github.com/google/uuid"
-	"github.com/sge-network/sge/testutil/sample"
-	"github.com/sge-network/sge/x/market/types"
+	"github.com/furynet/furynetwork/testutil/sample"
+	"github.com/furynet/furynetwork/x/market/types"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

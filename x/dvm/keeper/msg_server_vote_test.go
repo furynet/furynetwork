@@ -6,8 +6,8 @@ import (
 
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	"github.com/golang-jwt/jwt/v4"
-	simappUtil "github.com/sge-network/sge/testutil/simapp"
-	"github.com/sge-network/sge/x/dvm/types"
+	simappUtil "github.com/furynet/furynetwork/testutil/simapp"
+	"github.com/furynet/furynetwork/x/dvm/types"
 	"github.com/stretchr/testify/require"
 )
 

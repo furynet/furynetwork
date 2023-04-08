@@ -4,8 +4,8 @@ import (
 	"testing"
 	"time"
 
-	simappUtil "github.com/sge-network/sge/testutil/simapp"
-	"github.com/sge-network/sge/x/dvm/types"
+	simappUtil "github.com/furynet/furynetwork/testutil/simapp"
+	"github.com/furynet/furynetwork/x/dvm/types"
 	"github.com/stretchr/testify/require"
 )
 

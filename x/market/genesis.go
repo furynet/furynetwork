@@ -2,8 +2,8 @@ package market
 
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/sge-network/sge/x/market/keeper"
-	"github.com/sge-network/sge/x/market/types"
+	"github.com/furynet/furynetwork/x/market/keeper"
+	"github.com/furynet/furynetwork/x/market/types"
 )
 
 // InitGenesis initializes the module's state from a provided genesis

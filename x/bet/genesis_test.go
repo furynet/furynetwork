@@ -3,10 +3,10 @@ package bet_test
 import (
 	"testing"
 
-	"github.com/sge-network/sge/testutil/nullify"
-	simappUtil "github.com/sge-network/sge/testutil/simapp"
-	"github.com/sge-network/sge/x/bet"
-	"github.com/sge-network/sge/x/bet/types"
+	"github.com/furynet/furynetwork/testutil/nullify"
+	simappUtil "github.com/furynet/furynetwork/testutil/simapp"
+	"github.com/furynet/furynetwork/x/bet"
+	"github.com/furynet/furynetwork/x/bet/types"
 	"github.com/stretchr/testify/require"
 )
 

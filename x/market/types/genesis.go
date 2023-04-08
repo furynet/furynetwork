@@ -3,7 +3,7 @@ package types
 import (
 	"fmt"
 
-	"github.com/sge-network/sge/utils"
+	"github.com/furynet/furynetwork/utils"
 )
 
 // DefaultIndex is the default  global index

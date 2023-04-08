@@ -4,9 +4,9 @@ import (
 	"testing"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/sge-network/sge/consts"
-	"github.com/sge-network/sge/testutil/nullify"
-	"github.com/sge-network/sge/x/market/types"
+	"github.com/furynet/furynetwork/consts"
+	"github.com/furynet/furynetwork/testutil/nullify"
+	"github.com/furynet/furynetwork/x/market/types"
 	"github.com/spf13/cast"
 	"github.com/stretchr/testify/require"
 	"google.golang.org/grpc/codes"

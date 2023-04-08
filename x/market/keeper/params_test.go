@@ -3,7 +3,7 @@ package keeper_test
 import (
 	"testing"
 
-	"github.com/sge-network/sge/x/market/types"
+	"github.com/furynet/furynetwork/x/market/types"
 	"github.com/stretchr/testify/require"
 )
 

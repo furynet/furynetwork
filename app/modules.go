@@ -39,24 +39,24 @@ import (
 	ibctransfertypes "github.com/cosmos/ibc-go/v3/modules/apps/transfer/types"
 	ibc "github.com/cosmos/ibc-go/v3/modules/core"
 	ibchost "github.com/cosmos/ibc-go/v3/modules/core/24-host"
-	sgeappparams "github.com/sge-network/sge/app/params"
-	"github.com/sge-network/sge/x/mint"
-	minttypes "github.com/sge-network/sge/x/mint/types"
+	furyappparams "github.com/furynet/furynetwork/app/params"
+	"github.com/furynet/furynetwork/x/mint"
+	minttypes "github.com/furynet/furynetwork/x/mint/types"
 
-	betmodule "github.com/sge-network/sge/x/bet"
-	betmoduletypes "github.com/sge-network/sge/x/bet/types"
+	betmodule "github.com/furynet/furynetwork/x/bet"
+	betmoduletypes "github.com/furynet/furynetwork/x/bet/types"
 
-	marketmodule "github.com/sge-network/sge/x/market"
-	marketmoduletypes "github.com/sge-network/sge/x/market/types"
+	marketmodule "github.com/furynet/furynetwork/x/market"
+	marketmoduletypes "github.com/furynet/furynetwork/x/market/types"
 
-	strategicreservemodule "github.com/sge-network/sge/x/strategicreserve"
-	strategicreservemoduletypes "github.com/sge-network/sge/x/strategicreserve/types"
+	strategicreservemodule "github.com/furynet/furynetwork/x/strategicreserve"
+	strategicreservemoduletypes "github.com/furynet/furynetwork/x/strategicreserve/types"
 
-	dvmmodule "github.com/sge-network/sge/x/dvm"
-	dvmmoduletypes "github.com/sge-network/sge/x/dvm/types"
+	dvmmodule "github.com/furynet/furynetwork/x/dvm"
+	dvmmoduletypes "github.com/furynet/furynetwork/x/dvm/types"
 
-	housemodule "github.com/sge-network/sge/x/house"
-	housemoduletypes "github.com/sge-network/sge/x/house/types"
+	housemodule "github.com/furynet/furynetwork/x/house"
+	housemoduletypes "github.com/furynet/furynetwork/x/house/types"
 
 	// unnamed import of statik for swagger UI support
 	_ "github.com/cosmos/cosmos-sdk/client/docs/statik"
@@ -111,8 +111,8 @@ var ModuleBasics = module.NewBasicManager(
 )
 
 func appModules(
-	app *SgeApp,
-	encodingConfig sgeappparams.EncodingConfig,
+	app *FuryApp,
+	encodingConfig furyappparams.EncodingConfig,
 	skipGenesisInvariants bool,
 ) []module.AppModule {
 	appCodec := encodingConfig.Marshaler
@@ -155,8 +155,8 @@ func appModules(
 // simulationModules returns modules for simulation manager
 // define the order of the modules for deterministic simulations
 func simulationModules(
-	app *SgeApp,
-	encodingConfig sgeappparams.EncodingConfig,
+	app *FuryApp,
+	encodingConfig furyappparams.EncodingConfig,
 	_ bool,
 ) []module.AppModuleSimulation {
 	appCodec := encodingConfig.Marshaler
