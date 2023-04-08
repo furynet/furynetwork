@@ -22,14 +22,12 @@ service Query {
   // Queries an proposal by id and status.
   rpc PublicKeysChangeProposal(QueryPublicKeysChangeProposalRequest)
       returns (QueryPublicKeysChangeProposalResponse) {
-    option (google.api.http).get =
-        "/fury/dvm/pubkeys_proposal/{status}/{id}";
+    option (google.api.http).get = "/fury/dvm/pubkeys_proposal/{status}/{id}";
   }
   // Queries a list of proposal items by status.
   rpc PublicKeysChangeProposals(QueryPublicKeysChangeProposalsRequest)
       returns (QueryPublicKeysChangeProposalsResponse) {
-    option (google.api.http).get =
-        "/fury/dvm/pubkeys_proposals/{status}";
+    option (google.api.http).get = "/fury/dvm/pubkeys_proposals/{status}";
   }
 }
 

@@ -1,4 +1,4 @@
-module github.com/furynet/furynetworknetwork
+module github.com/furynet/furynetwork
 
 go 1.18
 

@@ -57,7 +57,7 @@ sudo mv furyd /usr/local/sbin/furyd
 - Clone git repository
 
 ```shell
-git clone https://github.com/furynet/furynetworknetwork.git
+git clone https://github.com/furynet/furynetwork.git
 ```
 
 - Checkout release tag

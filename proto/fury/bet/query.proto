@@ -41,8 +41,7 @@ service Query {
   // Queries list of settled Bet items of a certain height.
   rpc SettledBetsOfHeight(QuerySettledBetsOfHeightRequest)
       returns (QuerySettledBetsOfHeightResponse) {
-    option (google.api.http).get =
-        "/fury/bet/bets/settled/{block_height}";
+    option (google.api.http).get = "/fury/bet/bets/settled/{block_height}";
   }
 
   // Queries a list of Bet items filtered by uid list.
