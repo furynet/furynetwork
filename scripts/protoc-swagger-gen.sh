@@ -1,62 +1,67 @@
-#!/bin/sh
-#
-# This script is intended to be run inside the osmolabs/osmo-proto-gen:v0.8
-# docker container: https://hub.docker.com/r/osmolabs/osmo-proto-gen
+#!/usr/bin/env bash
 
 set -eo pipefail
 
-# The directory where the final output are to be stored
-docs_dir="./docs"
+rm -rf ./tmp-swagger-gen ./tmp && mkdir -p ./tmp-swagger-gen ./tmp/proto ./tmp/third_party
 
-# The directory where temporary swagger files are to be stored before they are
-# combined. Will be deleted in the end
-tmp_dir="./tmp-swagger-gen"
-if [ -d $tmp_dir ]; then
-  rm -rf $tmp_dir
-fi
-mkdir -p $tmp_dir
+chmod a+x ./scripts/protoc-swagger-gen-ibc.sh
+./scripts/protoc-swagger-gen-ibc.sh
 
-# Third-party proto dependencies
-# sh doesn't support arrays like bash does, but it does support comma-separated
-# strings: https://unix.stackexchange.com/a/323535
-deps="github.com/cosmos/cosmos-sdk"
-deps="$deps github.com/cosmos/ibc-go/v6"
-deps="$deps github.com/CosmWasm/wasmd"
+SDK_VERSION=v0.46.5
+FURYMOD_VERSION=v1.7.2
 
-# Download dependencies in go.mod
-# Necessary for the `go list` commands in the next step to work
-echo "Downloading dependencies..."
-for dep in $deps; do
-  echo $dep
-  go mod download $dep
-done
+go mod download github.com/cosmos/cosmos-sdk@${SDK_VERSION}
+go mod download github.com/irisnet/irismod@${FURYMOD_VERSION}
 
-# Directories that contain protobuf files that are to be transpiled into swagger
-# These include Mars modules and third party modules and services
-dirs="./proto"
-for dep in $deps; do
-  dep_dir=$(go list -f '{{ .Dir }}' -m $dep)
-  dirs="$dirs ${dep_dir}/proto"
-done
-proto_dirs=$(find $dirs -path -prune -o -name '*.proto' -print0 | xargs -0 -n1 dirname | sort | uniq)
+chmod -R 755 ${GOPATH}/pkg/mod/github.com/cosmos/cosmos-sdk@${SDK_VERSION}/proto
+chmod -R 755 ${GOPATH}/pkg/mod/github.com/irisnet/irismod@${FURYMOD_VERSION}/proto
 
-# Generate swagger files for `query.proto` and `service.proto`
+cp -r ${GOPATH}/pkg/mod/github.com/cosmos/cosmos-sdk@${SDK_VERSION}/proto ./tmp && rm -rf ./tmp/proto/cosmos/mint
+cp -r ${GOPATH}/pkg/mod/github.com/irisnet/irismod@${FURYMOD_VERSION}/proto ./tmp
+cp -r ./proto ./tmp
+
+proto_dirs=$(find ./tmp/proto -path -prune -o -name '*.proto' -print0 | xargs -0 -n1 dirname | sort | uniq)
 for dir in $proto_dirs; do
-  for file in $(find "${dir}" -maxdepth 1 \( -name 'query.proto' -o -name 'service.proto' \)); do
-    echo $file
-    buf generate --template ./proto/buf.gen.swagger.yaml $file
-  done
+    # generate swagger files (filter query files)
+    query_file=$(find "${dir}" -maxdepth 1 -name 'query.proto')
+    if [[ $dir =~ "cosmos" ]]; then
+        query_file=$(find "${dir}" -maxdepth 1 \( -name 'query.proto' -o -name 'service.proto' \))
+    fi
+    if [[ $dir =~ "ibc" ]]; then
+        query_file=$(find "${dir}" -maxdepth 1 \( -name 'query.proto' -o -name 'service.proto' \))
+    fi
+    if [[ ! -z "$query_file" ]]; then
+        buf generate --template buf.gen.swagger.yaml $query_file
+    fi
 done
 
-# Combine swagger files
-# Uses nodejs package `swagger-combine`.
-# All the individual swagger files need to be configured in `config.json` for merging
-echo "Combining swagger files..."
-swagger-combine ${docs_dir}/config.json \
-  -o ${docs_dir}/swagger.yml \
-  -f yaml \
-  --continueOnConflictingPaths true \
-  --includeDefinitions true
+# combine swagger files
+# uses nodejs package `swagger-combine`.
+# all the individual swagger files need to be configured in `config.json` for merging
+swagger-combine ./lite/config.json -o ./lite/swagger-ui/swagger.yaml -f yaml --continueOnConflictingPaths true --includeDefinitions true
 
-# Clean swagger files
-rm -rf $tmp_dir
+# replace APIs example
+sed -r -i 's/cosmos1[a-z,0-9]+/did:fury:iaa1sltcyjm5k0edlg59t47lsyw8gtgc3nudklntcq/g' ./lite/swagger-ui/swagger.yaml
+sed -r -i 's/cosmosvaloper1[a-z,0-9]+/did:fury:did:fury:iva1sltcyjm5k0edlg59t47lsyw8gtgc3nudrwey98/g' ./lite/swagger-ui/swagger.yaml
+sed -r -i 's/cosmosvalconspub1[a-z,0-9]+/did:fury:did:fury:icp1zcjduepqwhwqn4h5v6mqa7k3kmy7cjzchsx5ptsrqaulwrgfmghy3k9jtdzs6rdddm/g' ./lite/swagger-ui/swagger.yaml
+sed -i 's/Gaia/FURYhub/g' ./lite/swagger-ui/swagger.yaml
+sed -i 's/gaia/furyhub/g' ./lite/swagger-ui/swagger.yaml
+sed -i 's/cosmoshub/furyhub/g' ./lite/swagger-ui/swagger.yaml
+
+# TODO
+# generate proto doc
+# buf protoc \
+#     -I "tmp/proto" \
+#     -I "third_party/proto" \
+#     --doc_out=./docs/endpoints \
+#     --doc_opt=./docs/endpoints/protodoc-markdown.tmpl,proto-docs.md \
+#     $(find "$(pwd)/tmp/proto" -maxdepth 5 -name '*.proto')
+# cp ./docs/endpoints/proto-docs.md ./docs/zh/endpoints/proto-docs.md
+
+# clean swagger files
+rm -rf ./tmp-swagger-gen
+rm -rf ./github.com
+rm -rf ./cosmos
+
+# clean proto files
+rm -rf ./tmp
