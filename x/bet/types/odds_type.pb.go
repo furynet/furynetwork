@@ -57,7 +57,7 @@ func (OddsType) EnumDescriptor() ([]byte, []int) {
 }
 
 func init() {
-	proto.RegisterEnum("furynet.furynetwork.bet.OddsType", OddsType_name, OddsType_value)
+	proto.RegisterEnum("furynetwork.fury.bet.OddsType", OddsType_name, OddsType_value)
 }
 
 func init() { proto.RegisterFile("fury/bet/odds_type.proto", fileDescriptor_1281e1b8ca89efb8) }

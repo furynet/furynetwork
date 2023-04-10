@@ -69,7 +69,7 @@ func (m *Params) GetBatchSettlementCount() uint32 {
 }
 
 func init() {
-	proto.RegisterType((*Params)(nil), "furynet.furynetwork.bet.Params")
+	proto.RegisterType((*Params)(nil), "furynetwork.fury.bet.Params")
 }
 
 func init() { proto.RegisterFile("fury/bet/params.proto", fileDescriptor_6d6e477466ac48b7) }

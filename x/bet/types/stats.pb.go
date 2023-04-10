@@ -69,7 +69,7 @@ func (m *BetStats) GetCount() uint64 {
 }
 
 func init() {
-	proto.RegisterType((*BetStats)(nil), "furynet.furynetwork.bet.BetStats")
+	proto.RegisterType((*BetStats)(nil), "furynetwork.fury.bet.BetStats")
 }
 
 func init() { proto.RegisterFile("fury/bet/stats.proto", fileDescriptor_ec387af4ec3a4aa8) }

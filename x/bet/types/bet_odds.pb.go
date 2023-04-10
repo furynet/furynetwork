@@ -94,7 +94,7 @@ func (m *BetOdds) GetValue() string {
 }
 
 func init() {
-	proto.RegisterType((*BetOdds)(nil), "furynet.furynetwork.bet.BetOdds")
+	proto.RegisterType((*BetOdds)(nil), "furynetwork.fury.bet.BetOdds")
 }
 
 func init() { proto.RegisterFile("fury/bet/bet_odds.proto", fileDescriptor_740c0d70d0623968) }

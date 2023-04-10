@@ -16,7 +16,7 @@ PACKAGES_SIMTEST=$(shell go list ./... | grep '/simulation')
 LEDGER_ENABLED ?= true
 SDK_PACK := $(shell go list -m github.com/cosmos/cosmos-sdk | sed  's/ /\@/g')
 TM_VERSION := $(shell go list -m github.com/tendermint/tendermint | sed 's:.* ::') # grab everything after the space in "github.com/tendermint/tendermint v0.34.7"
-HTTPS_GIT := https://github.com/furynet/furynetwork.git
+HTTPS_GIT := https://github.com/furynet/xfury.git
 DOCKER := $(shell which docker)
 DOCKER_BUF := $(DOCKER) run --rm -v $(CURDIR)/proto:/workspace --workdir /workspace bufbuild/buf
 BUILDDIR ?= $(CURDIR)/build
@@ -68,7 +68,7 @@ build_tags_comma_sep := $(subst $(whitespace),$(comma),$(build_tags))
 # process linker flags
 
 ldflags = -X github.com/cosmos/cosmos-sdk/version.Name=fury \
-		  -X github.com/cosmos/cosmos-sdk/version.AppName=furyd \
+		  -X github.com/cosmos/cosmos-sdk/version.AppName=xfury \
 		  -X github.com/cosmos/cosmos-sdk/version.Version=$(VERSION) \
 		  -X github.com/cosmos/cosmos-sdk/version.Commit=$(COMMIT) \
 		  -X "github.com/cosmos/cosmos-sdk/version.BuildTags=$(build_tags_comma_sep)" \
@@ -145,7 +145,7 @@ go.sum: go.mod
 draw-deps:
 	@# requires brew install graphviz or apt-get install graphviz
 	go get github.com/RobotsAndPencils/goviz
-	@goviz -i ./cmd/furyd -d 2 | dot -Tpng -o dependency-graph.png
+	@goviz -i ./cmd/xfury -d 2 | dot -Tpng -o dependency-graph.png
 
 clean:
 	rm -rf $(CURDIR)/artifacts/
@@ -153,163 +153,66 @@ clean:
 distclean: clean
 	rm -rf vendor/
 
-
 ###############################################################################
-###                                Protobuf                                 ###
-###############################################################################
-
-protoVer=0.11.2
-protoImageName=ghcr.io/cosmos/proto-builder:$(protoVer)
-protoImage=$(DOCKER) run --rm -v $(CURDIR):/workspace --workdir /workspace $(protoImageName)
-
-proto-all: proto-format proto-gen proto-docs
-
-new-proto-gen:
-	@echo "Generating Protobuf files"
-	@$(protoImage) sh ./scripts/protoc-gen.sh
-
-proto-swagger-gen:
-	@echo "Generating Protobuf Swagger"
-	@$(protoImage) sh ./scripts/protoc-swagger-gen.sh
-
-proto-format:
-	@$(protoImage) find ./ -not -path "./third_party/*" -name *.proto -exec clang-format -i {} \;
-
-proto-lint:
-	@$(protoImage) buf lint --error-format=json
-
-proto-check-breaking:
-	@$(protoImage) buf breaking --against $(HTTPS_GIT)#branch=main
-
-proto-update-deps:
-	@echo "Updating Protobuf dependencies"
-	$(DOCKER) run --rm -v $(CURDIR)/proto:/workspace --workdir /workspace $(protoImageName) buf mod update
-
-containerProtoVer=v0.2
-containerProtoImage=tendermintdev/sdk-proto-gen:$(containerProtoVer)
-containerProtoGen=cosmos-sdk-proto-gen-$(containerProtoVer)
-
-proto-gen:
-	@echo "Generating Protobuf files"
-	docker rm $(containerProtoGen) || true
-	docker run --name $(containerProtoGen) -v $(CURDIR):/workspace --workdir /workspace $(containerProtoImage) sh ./scripts/protocgen.sh
-
-proto-docs:
-	@echo "Generating Protobuf docs"
-	docker rm $(containerProtoGen) || true
-	docker run --name $(containerProtoGen) -v $(CURDIR):/workspace --workdir /workspace $(containerProtoImage) sh ./scripts/protoc-docs-gen.sh
-
-
-###############################################################################
-###                          Tools & Dependencies                           ###
+###                                  Proto                                  ###
 ###############################################################################
 
-TOOLS_DESTDIR  ?= $(GOPATH)/bin
-STATIK         = $(TOOLS_DESTDIR)/statik
-RUNSIM         = $(TOOLS_DESTDIR)/runsim
+proto-all: proto-format proto-gen
 
-# Install the runsim binary with a temporary workaround of entering an outside
-# directory as the "go get" command ignores the -mod option and will polute the
-# go.{mod, sum} files.
-#
-# ref: https://github.com/golang/go/issues/30515
-runsim: $(RUNSIM)
-$(RUNSIM):
-	@echo "Installing runsim..."
-	@(cd /tmp && ${GO_MOD} go get github.com/cosmos/tools/cmd/runsim@master)
+proto:
+	@echo
+	@echo "=========== Generate Message ============"
+	@echo
+	./scripts/protocgen.sh
+	@echo
+	@echo "=========== Generate Complete ============"
+	@echo
 
-statik: $(STATIK)
-$(STATIK):
-	@echo "Installing statik..."
-	@(cd /tmp && go get github.com/rakyll/statik@v0.1.6)
+docs:
+	@echo
+	@echo "=========== Generate Message ============"
+	@echo
+	./scripts/generate-docs.sh
 
-contract-tools:
-ifeq (, $(shell which stringer))
-	@echo "Installing stringer..."
-	@go get golang.org/x/tools/cmd/stringer
-else
-	@echo "stringer already installed; skipping..."
-endif
-
-ifeq (, $(shell which go-bindata.exe))
-	@echo "Installing go-bindata..."
-	@go get github.com/kevinburke/go-bindata/go-bindata
-else
-	@echo "go-bindata already installed; skipping..."
-endif
-
-ifeq (, $(shell which gencodec))
-	@echo "Installing gencodec..."
-	@go get github.com/fjl/gencodec
-else
-	@echo "gencodec already installed; skipping..."
-endif
-
-ifeq (, $(shell which protoc-gen-go))
-	@echo "Installing protoc-gen-go..."
-	@go get github.com/fjl/gencodec github.com/golang/protobuf/protoc-gen-go
-else
-	@echo "protoc-gen-go already installed; skipping..."
-endif
-
-ifeq (, $(shell which protoc))
-	@echo "Please istalling protobuf according to your OS"
-	@echo "macOS: brew install protobuf"
-	@echo "linux: apt-get install -f -y protobuf-compiler"
-else
-	@echo "protoc already installed; skipping..."
-endif
-
-ifeq (, $(shell which solcjs))
-	@echo "Installing solcjs..."
-	@npm install -g solc@0.5.11
-else
-	@echo "solcjs already installed; skipping..."
-endif
-
-docs-tools:
-ifeq (, $(shell which yarn))
-	@echo "Installing yarn..."
-	@npm install -g yarn
-else
-	@echo "yarn already installed; skipping..."
-endif
-
-tools: tools-stamp
-tools-stamp: contract-tools docs-tools proto-tools statik runsim
-	# Create dummy file to satisfy dependency and avoid
-	# rebuilding when this Makefile target is hit twice
-	# in a row.
-	touch $@
-
-tools-clean:
-	rm -f $(RUNSIM)
-	rm -f tools-stamp
-
-docs-tools-stamp: docs-tools
-	# Create dummy file to satisfy dependency and avoid
-	# rebuilding when this Makefile target is hit twice
-	# in a row.
-	touch $@
-
-.PHONY: runsim statik tools contract-tools docs-tools proto-tools  tools-stamp tools-clean docs-tools-stamp
-
-go.sum: go.mod
-	echo "Ensure dependencies have not been modified ..." >&2
-	go mod verify
-	go mod tidy
-
-
-
-update-swagger-docs: statik
-	$(BINDIR)/statik -src=client/docs/swagger-ui -dest=client/docs -f -m
+	statik -src=client/docs/static -dest=client/docs -f -m
 	@if [ -n "$(git status --porcelain)" ]; then \
         echo "\033[91mSwagger docs are out of sync!!!\033[0m";\
         exit 1;\
     else \
         echo "\033[92mSwagger docs are in sync\033[0m";\
     fi
-.PHONY: update-swagger-docs
+	@echo
+	@echo "=========== Generate Complete ============"
+	@echo
+.PHONY: docs
+
+protoVer=v0.8
+protoImageName=fanfury/fanfury:xfury--proto-gen-$(protoVer)
+containerProtoGen=cosmos-sdk-proto-gen-$(protoVer)
+containerProtoFmt=cosmos-sdk-proto-fmt-$(protoVer)
+
+proto-gen:
+	@echo "Generating Protobuf files"
+	@if docker ps -a --format '{{.Names}}' | grep -Eq "^${containerProtoGen}$$"; then docker start -a $(containerProtoGen); else docker run --name $(containerProtoGen) -v $(CURDIR):/workspace --workdir /workspace $(protoImageName) \
+		sh ./scripts/protocgen.sh; fi
+
+proto-format:
+	@echo "Formatting Protobuf files"
+	@if docker ps -a --format '{{.Names}}' | grep -Eq "^${containerProtoFmt}$$"; then docker start -a $(containerProtoFmt); else docker run --name $(containerProtoFmt) -v $(CURDIR):/workspace --workdir /workspace tendermintdev/docker-build-proto \
+		find ./ -not -path "./third_party/*" -name "*.proto" -exec clang-format -i {} \; ; fi
+
+proto-image-build:
+	@DOCKER_BUILDKIT=1 docker build -t $(protoImageName) -f ./proto/Dockerfile ./proto
+
+proto-image-push:
+	docker push $(protoImageName)
+
+proto-lint:
+	@$(DOCKER_BUF) lint --error-format=json
+
+proto-check-breaking:
+	@$(DOCKER_BUF) breaking --against $(HTTPS_GIT)#branch=master
+
 
 ###############################################################################
 ###                           Tests & Simulation                            ###
@@ -333,17 +236,17 @@ test-cover:
 benchmark:
 	@go test -mod=readonly -bench=. $(PACKAGES_UNIT)
 
-################################################################################
-###                                 Linting                                  ###
-################################################################################
 
-golangci_lint_cmd=github.com/golangci/golangci-lint/cmd/golangci-lint
+###############################################################################
+###                                Linting                                  ###
+###############################################################################
+
+golangci_lint_cmd=go run github.com/golangci/golangci-lint/cmd/golangci-lint
 
 lint:
-	@echo "🤖 Running linter..."
-	go run $(golangci_lint_cmd) run --timeout=10m
-	@echo "✅ Completed linting!"
-
+	@echo "--> Running linter"
+	$(golangci_lint_cmd) run --timeout=10m
+	$(DOCKER) run -v $(PWD):/workdir ghcr.io/igorshubovych/markdownlint-cli:latest "**/*.md"
 
 format:
 	$(golangci_lint_cmd) run ./... --fix

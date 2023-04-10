@@ -1,6 +1,6 @@
 
 syntax = "proto3";
-package furynet.furynetwork.bet;
+package furynetwork.fury.bet;
 
 import "gogoproto/gogo.proto";
 import "fury/bet/bet_odds.proto";
@@ -17,5 +17,5 @@ message BetPlacementTicketPayload {
   KycDataPayload kyc_data = 2 [ (gogoproto.nullable) = false ];
   // odds_type is the type of odds that are going to be placed
   // such as decimal, fraction, moneyline.
-  furynet.furynetwork.bet.OddsType odds_type = 3;
+  furynetwork.fury.bet.OddsType odds_type = 3;
 }

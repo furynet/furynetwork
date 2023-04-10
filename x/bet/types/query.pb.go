@@ -751,20 +751,20 @@ func (m *QuerySettledBetsOfHeightResponse) GetPagination() *query.PageResponse {
 }
 
 func init() {
-	proto.RegisterType((*QueryParamsRequest)(nil), "furynet.furynetwork.bet.QueryParamsRequest")
-	proto.RegisterType((*QueryParamsResponse)(nil), "furynet.furynetwork.bet.QueryParamsResponse")
-	proto.RegisterType((*QueryBetRequest)(nil), "furynet.furynetwork.bet.QueryBetRequest")
-	proto.RegisterType((*QueryBetResponse)(nil), "furynet.furynetwork.bet.QueryBetResponse")
-	proto.RegisterType((*QueryBetsRequest)(nil), "furynet.furynetwork.bet.QueryBetsRequest")
-	proto.RegisterType((*QueryBetsResponse)(nil), "furynet.furynetwork.bet.QueryBetsResponse")
-	proto.RegisterType((*QueryBetsByCreatorRequest)(nil), "furynet.furynetwork.bet.QueryBetsByCreatorRequest")
-	proto.RegisterType((*QueryBetsByCreatorResponse)(nil), "furynet.furynetwork.bet.QueryBetsByCreatorResponse")
-	proto.RegisterType((*QueryBetsByUIDsRequest)(nil), "furynet.furynetwork.bet.QueryBetsByUIDsRequest")
-	proto.RegisterType((*QueryBetsByUIDsResponse)(nil), "furynet.furynetwork.bet.QueryBetsByUIDsResponse")
-	proto.RegisterType((*QueryPendingBetsRequest)(nil), "furynet.furynetwork.bet.QueryPendingBetsRequest")
-	proto.RegisterType((*QueryPendingBetsResponse)(nil), "furynet.furynetwork.bet.QueryPendingBetsResponse")
-	proto.RegisterType((*QuerySettledBetsOfHeightRequest)(nil), "furynet.furynetwork.bet.QuerySettledBetsOfHeightRequest")
-	proto.RegisterType((*QuerySettledBetsOfHeightResponse)(nil), "furynet.furynetwork.bet.QuerySettledBetsOfHeightResponse")
+	proto.RegisterType((*QueryParamsRequest)(nil), "furynetwork.fury.bet.QueryParamsRequest")
+	proto.RegisterType((*QueryParamsResponse)(nil), "furynetwork.fury.bet.QueryParamsResponse")
+	proto.RegisterType((*QueryBetRequest)(nil), "furynetwork.fury.bet.QueryBetRequest")
+	proto.RegisterType((*QueryBetResponse)(nil), "furynetwork.fury.bet.QueryBetResponse")
+	proto.RegisterType((*QueryBetsRequest)(nil), "furynetwork.fury.bet.QueryBetsRequest")
+	proto.RegisterType((*QueryBetsResponse)(nil), "furynetwork.fury.bet.QueryBetsResponse")
+	proto.RegisterType((*QueryBetsByCreatorRequest)(nil), "furynetwork.fury.bet.QueryBetsByCreatorRequest")
+	proto.RegisterType((*QueryBetsByCreatorResponse)(nil), "furynetwork.fury.bet.QueryBetsByCreatorResponse")
+	proto.RegisterType((*QueryBetsByUIDsRequest)(nil), "furynetwork.fury.bet.QueryBetsByUIDsRequest")
+	proto.RegisterType((*QueryBetsByUIDsResponse)(nil), "furynetwork.fury.bet.QueryBetsByUIDsResponse")
+	proto.RegisterType((*QueryPendingBetsRequest)(nil), "furynetwork.fury.bet.QueryPendingBetsRequest")
+	proto.RegisterType((*QueryPendingBetsResponse)(nil), "furynetwork.fury.bet.QueryPendingBetsResponse")
+	proto.RegisterType((*QuerySettledBetsOfHeightRequest)(nil), "furynetwork.fury.bet.QuerySettledBetsOfHeightRequest")
+	proto.RegisterType((*QuerySettledBetsOfHeightResponse)(nil), "furynetwork.fury.bet.QuerySettledBetsOfHeightResponse")
 }
 
 func init() { proto.RegisterFile("fury/bet/query.proto", fileDescriptor_65dfa1d6432df060) }
@@ -867,7 +867,7 @@ func NewQueryClient(cc grpc1.ClientConn) QueryClient {
 
 func (c *queryClient) Params(ctx context.Context, in *QueryParamsRequest, opts ...grpc.CallOption) (*QueryParamsResponse, error) {
 	out := new(QueryParamsResponse)
-	err := c.cc.Invoke(ctx, "/furynet.furynetwork.bet.Query/Params", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/furynetwork.fury.bet.Query/Params", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -876,7 +876,7 @@ func (c *queryClient) Params(ctx context.Context, in *QueryParamsRequest, opts .
 
 func (c *queryClient) Bet(ctx context.Context, in *QueryBetRequest, opts ...grpc.CallOption) (*QueryBetResponse, error) {
 	out := new(QueryBetResponse)
-	err := c.cc.Invoke(ctx, "/furynet.furynetwork.bet.Query/Bet", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/furynetwork.fury.bet.Query/Bet", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -885,7 +885,7 @@ func (c *queryClient) Bet(ctx context.Context, in *QueryBetRequest, opts ...grpc
 
 func (c *queryClient) BetsByCreator(ctx context.Context, in *QueryBetsByCreatorRequest, opts ...grpc.CallOption) (*QueryBetsByCreatorResponse, error) {
 	out := new(QueryBetsByCreatorResponse)
-	err := c.cc.Invoke(ctx, "/furynet.furynetwork.bet.Query/BetsByCreator", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/furynetwork.fury.bet.Query/BetsByCreator", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -894,7 +894,7 @@ func (c *queryClient) BetsByCreator(ctx context.Context, in *QueryBetsByCreatorR
 
 func (c *queryClient) Bets(ctx context.Context, in *QueryBetsRequest, opts ...grpc.CallOption) (*QueryBetsResponse, error) {
 	out := new(QueryBetsResponse)
-	err := c.cc.Invoke(ctx, "/furynet.furynetwork.bet.Query/Bets", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/furynetwork.fury.bet.Query/Bets", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -903,7 +903,7 @@ func (c *queryClient) Bets(ctx context.Context, in *QueryBetsRequest, opts ...gr
 
 func (c *queryClient) PendingBets(ctx context.Context, in *QueryPendingBetsRequest, opts ...grpc.CallOption) (*QueryPendingBetsResponse, error) {
 	out := new(QueryPendingBetsResponse)
-	err := c.cc.Invoke(ctx, "/furynet.furynetwork.bet.Query/PendingBets", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/furynetwork.fury.bet.Query/PendingBets", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -912,7 +912,7 @@ func (c *queryClient) PendingBets(ctx context.Context, in *QueryPendingBetsReque
 
 func (c *queryClient) SettledBetsOfHeight(ctx context.Context, in *QuerySettledBetsOfHeightRequest, opts ...grpc.CallOption) (*QuerySettledBetsOfHeightResponse, error) {
 	out := new(QuerySettledBetsOfHeightResponse)
-	err := c.cc.Invoke(ctx, "/furynet.furynetwork.bet.Query/SettledBetsOfHeight", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/furynetwork.fury.bet.Query/SettledBetsOfHeight", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -921,7 +921,7 @@ func (c *queryClient) SettledBetsOfHeight(ctx context.Context, in *QuerySettledB
 
 func (c *queryClient) BetsByUIDs(ctx context.Context, in *QueryBetsByUIDsRequest, opts ...grpc.CallOption) (*QueryBetsByUIDsResponse, error) {
 	out := new(QueryBetsByUIDsResponse)
-	err := c.cc.Invoke(ctx, "/furynet.furynetwork.bet.Query/BetsByUIDs", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/furynetwork.fury.bet.Query/BetsByUIDs", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -986,7 +986,7 @@ func _Query_Params_Handler(srv interface{}, ctx context.Context, dec func(interf
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/furynet.furynetwork.bet.Query/Params",
+		FullMethod: "/furynetwork.fury.bet.Query/Params",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(QueryServer).Params(ctx, req.(*QueryParamsRequest))
@@ -1004,7 +1004,7 @@ func _Query_Bet_Handler(srv interface{}, ctx context.Context, dec func(interface
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/furynet.furynetwork.bet.Query/Bet",
+		FullMethod: "/furynetwork.fury.bet.Query/Bet",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(QueryServer).Bet(ctx, req.(*QueryBetRequest))
@@ -1022,7 +1022,7 @@ func _Query_BetsByCreator_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/furynet.furynetwork.bet.Query/BetsByCreator",
+		FullMethod: "/furynetwork.fury.bet.Query/BetsByCreator",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(QueryServer).BetsByCreator(ctx, req.(*QueryBetsByCreatorRequest))
@@ -1040,7 +1040,7 @@ func _Query_Bets_Handler(srv interface{}, ctx context.Context, dec func(interfac
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/furynet.furynetwork.bet.Query/Bets",
+		FullMethod: "/furynetwork.fury.bet.Query/Bets",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(QueryServer).Bets(ctx, req.(*QueryBetsRequest))
@@ -1058,7 +1058,7 @@ func _Query_PendingBets_Handler(srv interface{}, ctx context.Context, dec func(i
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/furynet.furynetwork.bet.Query/PendingBets",
+		FullMethod: "/furynetwork.fury.bet.Query/PendingBets",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(QueryServer).PendingBets(ctx, req.(*QueryPendingBetsRequest))
@@ -1076,7 +1076,7 @@ func _Query_SettledBetsOfHeight_Handler(srv interface{}, ctx context.Context, de
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/furynet.furynetwork.bet.Query/SettledBetsOfHeight",
+		FullMethod: "/furynetwork.fury.bet.Query/SettledBetsOfHeight",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(QueryServer).SettledBetsOfHeight(ctx, req.(*QuerySettledBetsOfHeightRequest))
@@ -1094,7 +1094,7 @@ func _Query_BetsByUIDs_Handler(srv interface{}, ctx context.Context, dec func(in
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/furynet.furynetwork.bet.Query/BetsByUIDs",
+		FullMethod: "/furynetwork.fury.bet.Query/BetsByUIDs",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(QueryServer).BetsByUIDs(ctx, req.(*QueryBetsByUIDsRequest))
@@ -1103,7 +1103,7 @@ func _Query_BetsByUIDs_Handler(srv interface{}, ctx context.Context, dec func(in
 }
 
 var _Query_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "furynet.furynetwork.bet.Query",
+	ServiceName: "furynetwork.fury.bet.Query",
 	HandlerType: (*QueryServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

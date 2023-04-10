@@ -1,5 +1,5 @@
 syntax = "proto3";
-package furynet.furynetwork.bet;
+package furynetwork.fury.bet;
 
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";

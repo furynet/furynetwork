@@ -1,5 +1,5 @@
 syntax = "proto3";
-package furynet.furynetwork.bet;
+package furynetwork.fury.bet;
 
 import "fury/bet/place_bet_fields.proto";
 
